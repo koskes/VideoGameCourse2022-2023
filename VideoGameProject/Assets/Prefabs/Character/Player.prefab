@@ -40,7 +40,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7785946637568791840}
-  - component: {fileID: 4246069692769406810}
+  - component: {fileID: 4692465641468969567}
   - component: {fileID: 7441896686649020304}
   - component: {fileID: 7441896686649020305}
   - component: {fileID: 839502154671908202}
@@ -71,7 +71,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &4246069692769406810
+--- !u!95 &4692465641468969567
 Animator:
   serializedVersion: 4
   m_ObjectHideFlags: 0
@@ -167,8 +167,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pushLayers:
     serializedVersion: 2
-    m_Bits: 0
-  canPush: 0
+    m_Bits: 1
+  canPush: 1
   strength: 1.1
 --- !u!114 &6622739752246957030
 MonoBehaviour:
@@ -366,7 +366,7 @@ PrefabInstance:
     - target: {fileID: 3296356810526147535, guid: f41b7fd009d05ff4d8bf2760e2f12c8a,
         type: 3}
       propertyPath: m_Name
-      value: NormalPlayerBody
+      value: NormalPlayer
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f41b7fd009d05ff4d8bf2760e2f12c8a, type: 3}

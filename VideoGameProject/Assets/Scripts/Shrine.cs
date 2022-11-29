@@ -47,6 +47,9 @@ public class Shrine : MonoBehaviour
         GameObject newBody = Instantiate(body, elementC.currentBody.transform.parent);
         newBody.transform.localPosition = Vector3.zero;
         newBody.transform.localRotation = Quaternion.identity;
+        newBody.name = newBody.name.Split("(Clone)")[0]; //change name for "Example (Clone)" to "Example"
+
+
         SkinnedMeshRenderer newMeshRenderer = newBody.GetComponentInChildren<SkinnedMeshRenderer>();
         newMeshRenderer.enabled = false;
 
@@ -57,7 +60,7 @@ public class Shrine : MonoBehaviour
 
         //elementC.GetComponent<Animator>().enabled = false;
         yield return null;
-        elementC.GetComponent<Animator>().Rebind();
+        elementC.GetComponentInChildren<Animator>().Rebind();
         newMeshRenderer.enabled = true;
         //elementC.GetComponent<Animator>().enabled = true;
     }
