@@ -6,7 +6,7 @@ public class DamageTrigger : MonoBehaviour
 {
     [SerializeField] private float damage = 10f;
 
-    private void OnTriggerStay(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         DealDamage(other.gameObject);
     }
