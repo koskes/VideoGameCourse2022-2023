@@ -45,6 +45,11 @@ public class Shooter : MonoBehaviour
         clone.transform.parent = null;
         //clone.transform.position = transform.position; //100,0,0
         Destroy(clone, 5f);
-        clone.GetComponent<Rigidbody>().AddForce(transform.forward * power, ForceMode.VelocityChange);
+
+        Vector3 dir = Camera.main.transform.forward;
+        clone.GetComponent<Rigidbody>().AddForce(dir * power, ForceMode.VelocityChange);
+
+
+        //clone.GetComponent<Rigidbody>().AddForce(transform.forward * power, ForceMode.VelocityChange);
     }
 }
