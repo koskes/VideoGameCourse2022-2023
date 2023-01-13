@@ -8,6 +8,8 @@ public class EnemyHealth : Health
     private Spawner myParentSpawner;
     public Slider healthBar;
     public Animator animator;
+    public GameObject[] loots;
+    public float force;
 
     protected override void Start()
     {
@@ -42,6 +44,32 @@ public class EnemyHealth : Health
 
         myParentSpawner.NotifyDeath(this);
 
-        Destroy(gameObject);
+        animator.SetTrigger("Death");
+
+        DropLoot();
+
+        //remove logic
+        enabled = false; //enemyhealth
+        GetComponentInParent<Enemy>().enabled = false;
+        GetComponentInParent<UnityEngine.AI.NavMeshAgent>().destination = transform.position;
+        GetComponentInParent<UnityEngine.AI.NavMeshAgent>().enabled = false;
+
+        foreach (Collider collider in GetComponentsInChildren<Collider>())
+        {
+            Destroy(collider);
+        }
+
+
+        Destroy(GetComponentInChildren<Canvas>());
+        //Destroy(gameObject);
+    }
+
+    void DropLoot()
+    {
+        foreach (GameObject item in loots)
+        {
+            Instantiate(item, transform.position, transform.rotation);
+            GetComponent<Rigidbody>().AddExplosionForce(force, transform.position, 4f);
+        }
     }
 }

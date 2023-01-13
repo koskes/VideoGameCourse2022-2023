@@ -52,6 +52,4 @@ public class Enemy : MonoBehaviour
     {
         animator.SetTrigger("Attack");
     }
-
-    
 }

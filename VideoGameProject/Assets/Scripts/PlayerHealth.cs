@@ -11,6 +11,7 @@ public class PlayerHealth : Health
     [SerializeField] bool immune;
     [SerializeField] Slider healthBar;
     [SerializeField] GameObject gameOverScreen;
+    [SerializeField] Animator animator;
 
     protected override void Start()
     {
@@ -34,6 +35,8 @@ public class PlayerHealth : Health
 
         healthBar.value = currentHealth / totalHealth;
 
+        animator.SetTrigger("Hit");
+
         if (currentHealth <= 0)
         {
             Die();
@@ -52,6 +55,26 @@ public class PlayerHealth : Health
         base.Die();
 
         Debug.Log("Game Over");
+
+        animator.SetTrigger("Death");
+
+        foreach (Component component in GetComponentsInChildren<Component>())
+        {
+            if (component.GetType() != typeof(SkinnedMeshRenderer)
+                && component.GetType() != typeof(Transform)
+                && component.GetType() != typeof(Animator)
+               )
+            {
+                Debug.Log(component.ToString());
+                Destroy(component);
+            }
+        }
+
+        foreach (Enemy enemy in GameObject.FindObjectsOfType<Enemy>())
+        {
+            enemy.LostPlayer(gameObject);
+        }
+        GameObject.FindObjectsOfType<Enemy>();
 
         gameOverScreen.SetActive(true);
     }
