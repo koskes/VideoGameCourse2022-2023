@@ -39,15 +39,16 @@ public class Shooter : MonoBehaviour
         //if (Input.GetMouseButtonDown(0)){
         timeShoot++;
         GameObject clone = GameObject.Instantiate(projectilePrefab, transform);
-        clone.transform.position = castPosition.position;
+        Vector3 cameraDir = Camera.main.transform.forward;
+
+        clone.transform.position = castPosition.position + cameraDir.normalized;
         clone.SetActive(true);
         //clone.transform.localPosition = new Vector3(0,0,0);
         clone.transform.parent = null;
         //clone.transform.position = transform.position; //100,0,0
         Destroy(clone, 5f);
 
-        Vector3 dir = Camera.main.transform.forward;
-        clone.GetComponent<Rigidbody>().AddForce(dir * power, ForceMode.VelocityChange);
+        clone.GetComponent<Rigidbody>().AddForce(cameraDir * power, ForceMode.VelocityChange);
 
 
         //clone.GetComponent<Rigidbody>().AddForce(transform.forward * power, ForceMode.VelocityChange);

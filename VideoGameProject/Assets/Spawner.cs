@@ -10,6 +10,7 @@ public class Spawner : MonoBehaviour
     public float activeEnemies = 0;
     public float totalEnemiesSpawned;
     public float enemiesAtOnce = 2;
+    public float originRandomOffset = 2;
     public UnityEvent onSpawnerEnd;
 
     // Start is called before the first frame update
@@ -59,8 +60,8 @@ public class Spawner : MonoBehaviour
 
     Vector3 RandomSpawnPosition()
     {
-        float x = Random.Range(transform.position.x - 2f, transform.position.x + 2f);
-        float z = Random.Range(transform.position.z - 2f, transform.position.z + 2f);
+        float x = Random.Range(transform.position.x - originRandomOffset, transform.position.x + originRandomOffset);
+        float z = Random.Range(transform.position.z - originRandomOffset, transform.position.z + originRandomOffset);
 
         return new Vector3(x, transform.position.y, z);
     }
