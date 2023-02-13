@@ -772,6 +772,7 @@ GameObject:
   - component: {fileID: 5626368487297013747}
   - component: {fileID: 5626368487297013746}
   - component: {fileID: 4258991696758124084}
+  - component: {fileID: -5684155074707116005}
   m_Layer: 0
   m_Name: Enemy1
   m_TagString: Untagged
@@ -870,6 +871,22 @@ MonoBehaviour:
   - {fileID: 4988321487290387957, guid: 3f25f5221fbd1f640a8622fabc63332b, type: 3}
   - {fileID: 4988321487290387957, guid: 3f25f5221fbd1f640a8622fabc63332b, type: 3}
   force: 100
+--- !u!54 &-5684155074707116005
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5626368487297013710}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &5626368487702741746
 GameObject:
   m_ObjectHideFlags: 0
