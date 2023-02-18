@@ -60,7 +60,7 @@ public class EnemyHealth : Health
         }
 
 
-        Destroy(GetComponentInChildren<Canvas>());
+        Destroy(GetComponentInChildren<Canvas>().gameObject);
         //Destroy(gameObject);
     }
 
