@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
 using UnityEngine.SceneManagement;
+using UnityEngine.ProBuilder.MeshOperations;
 
 //Manager class for pausing the app
 public class PauseMenu : MonoBehaviour
 {
     [SerializeField] GameObject pauseScreen; // User Interface (UI) elements shown on pause
+    [SerializeField] GameObject helpScreen;
     [SerializeField] CinemachineBrain cinemachineBrain; // Controls the camera behaviour of the player
     bool onPause = false;
     float timeScaleBeforePause = 1f;
@@ -27,8 +29,8 @@ public class PauseMenu : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // When Escape button pressed, toggle between Pause and Unpause (Resume)
-        if (Input.GetKeyUp(KeyCode.Escape))
+        // When F2 button pressed, toggle between Pause and Unpause (Resume)
+        if (Input.GetKeyUp(KeyCode.F2))
         {
             if (!onPause)
             {
@@ -39,64 +41,71 @@ public class PauseMenu : MonoBehaviour
                 Unpause();
             }
         }
+        else if (Input.GetKeyUp(KeyCode.F1)) { 
+            if (!onPause)
+            {
+                ShowHint();
+            }
+            else
+            {
+                DisableHint();
+            }
+        }
+        else if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            SceneManager.LoadSceneAsync("MainMenuScene");
+            cursorWasVisible = Cursor.visible;
+            cursorWasLocked = Cursor.lockState;
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+        }
     }
 
     // Pauses the app by freezing the time scale 
     void Pause()
     {
         onPause = true;
-
         cursorWasVisible = Cursor.visible;
         cursorWasLocked = Cursor.lockState;
-
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
-
-        //Cursor.lockState = CursorLockMode.None;
-        //Cursor.visible = true;
-
-
-        // Show pause screen
         pauseScreen.SetActive(onPause);
-
-        // ------- Disabling any extra behaviours ----------
-
-        cinemachineBrain.enabled = !onPause; //disable camera control with mouse movement
-
-        // L______
-
-        // Set the speed that time passes to zero
-        timeScaleBeforePause = Time.timeScale; //store value
-
+        cinemachineBrain.enabled = !onPause;
+        timeScaleBeforePause = Time.timeScale;
         Time.timeScale = 0f;
-
-
-        // Example: Time will run twice as fast with Time.timeScale = 2f;
     }
 
-    // Pauses the app by unfreezing the time scale
+    void ShowHint()
+    {
+        onPause = true;
+        cursorWasVisible = Cursor.visible;
+        cursorWasLocked = Cursor.lockState;
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+        helpScreen.SetActive(onPause);
+        cinemachineBrain.enabled = !onPause;
+        timeScaleBeforePause = Time.timeScale;
+        Time.timeScale = 0f;
+    }
+
     public void Unpause()
     {
-
         onPause = false;
-
         Cursor.visible = cursorWasVisible;
         Cursor.lockState = cursorWasLocked;
-
-        //Cursor.lockState = CursorLockMode.Locked;
-        //Cursor.visible = false;
-
-
-        // Hide pause screen
         pauseScreen.SetActive(onPause);
+        cinemachineBrain.enabled = !onPause; 
+        Time.timeScale = timeScaleBeforePause;
+        Debug.Log("Unpausing...");
+    }
 
-        // ------- Enabling any extra behaviours ----------
-
-        cinemachineBrain.enabled = !onPause; //enable camera control with mouse movement
-
-        // L______
-
-        // Set the speed that time passes back to what it was before pause
+    public void DisableHint()
+    {
+        onPause = false;
+        Cursor.visible = cursorWasVisible;
+        Cursor.lockState = cursorWasLocked;
+        helpScreen.SetActive(onPause);
+        cinemachineBrain.enabled = !onPause;
         Time.timeScale = timeScaleBeforePause;
         Debug.Log("Unpausing...");
     }
@@ -110,5 +119,13 @@ public class PauseMenu : MonoBehaviour
     {
         Application.Quit();
         Debug.Log("Exiting...");
+    }
+
+    public void RestartGame()
+    {
+        Time.timeScale = 1;
+        SceneManager.LoadSceneAsync("ElementLand");
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 }

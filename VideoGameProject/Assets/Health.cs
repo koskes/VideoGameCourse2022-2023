@@ -31,5 +31,7 @@ public class Health : MonoBehaviour
     {
         alive = false;
         Debug.Log("Death: " + name);
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
     }
 }
