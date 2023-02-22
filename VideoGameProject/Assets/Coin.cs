@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class Coin : MonoBehaviour
 {
@@ -22,17 +24,20 @@ public class Coin : MonoBehaviour
             if (Vector3.Distance(transform.position, target.position)  < 0.2f)
             {
                 Destroy(gameObject);
-                //give coin
             }
         }
     }
 
     private void OnTriggerEnter(Collider other)
     {
+        if (target != null) return;
+
         if (other.CompareTag("Player"))
         {
             target = other.transform;
             GetComponentInChildren<MeshCollider>().enabled = false;
+            ScoreManager.scorevalue += 10;
         }
     }
+
 }

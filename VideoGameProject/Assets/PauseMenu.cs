@@ -123,6 +123,7 @@ public class PauseMenu : MonoBehaviour
 
     public void RestartGame()
     {
+        ScoreManager.scorevalue = 0;
         Time.timeScale = 1;
         SceneManager.LoadSceneAsync("ElementLand");
         Cursor.visible = false;

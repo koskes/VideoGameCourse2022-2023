@@ -21,6 +21,7 @@ public class MainMenuManager : MonoBehaviour
         menuscreen.SetActive(false);
         blocker.SetActive(true);
         Time.timeScale = 1;
+        ScoreManager.scorevalue = 0;
         SceneManager.LoadSceneAsync("ElementLand");
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
